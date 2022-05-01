@@ -1,0 +1,16 @@
+{
+  "name": "soccer-subs-solver",
+  "version": "0.1.0",
+  "description": "Builds a soccer sub list by assigning players to positions",
+  "main": "SubBuilder.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "run": "node index.js"
+  },
+  "author": "Gabe Hamilton",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
