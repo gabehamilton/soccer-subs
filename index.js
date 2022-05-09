@@ -8,4 +8,5 @@ const subBuilder = new SubBuilder()
 const yamlFile = yaml.load(fs.readFileSync('./playerConfig.yml', 'utf8'))
 
 // build roster
-subBuilder.buildRoster(yamlFile)
+const roster = subBuilder.buildRoster(yamlFile)
+subBuilder.printRoster(roster)

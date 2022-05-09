@@ -5,12 +5,15 @@
   "main": "SubBuilder.js",
   "type": "module",
   "scripts": {
-    "test": "test",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "run": "node index.js"
   },
   "author": "Gabe Hamilton",
   "license": "MIT",
   "dependencies": {
     "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "jest": "^28.0.3"
   }
 }
