@@ -21,20 +21,29 @@ export default class SubBuilder {
       return 0
     }
 
+    // avoid same players in same positions
+    let offsetEveryXNumberOfRotations = 0
+    if(players.length % this.positions5.length == 0) {
+      // needs test || this.positions5.length % (players.length - this.positions5.length) == 0) {
+      offsetEveryXNumberOfRotations = players.length / this.positions5.length
+    }
+
     const numBlocks = 8
 
     let playerIndex = 0
     const rosterBlockArray = []
     for (let i = 0; i < numBlocks; i++) {
-      const assignedPositionsArray = []
-      rosterBlockArray.push(assignedPositionsArray)
+      const assignedPositionsMap = {}
+      rosterBlockArray.push(assignedPositionsMap)
       for (let positionIndex = 0; positionIndex < this.positions5.length; positionIndex++) {
-        const position = this.positions5[positionIndex]
+        let offsetPositionIndex = positionIndex
+        if(offsetEveryXNumberOfRotations > 0) {
+          offsetPositionIndex+= Math.floor(i / offsetEveryXNumberOfRotations)
+          offsetPositionIndex = offsetPositionIndex % this.positions5.length
+        }
+        const position = this.positions5[offsetPositionIndex]
         const player = players[playerIndex]
-        assignedPositionsArray.push({
-          player,
-          position
-        })
+        assignedPositionsMap[position] =  player
         playerIndex++
         if(playerIndex == players.length) {playerIndex = 0}
       }
@@ -50,10 +59,10 @@ export default class SubBuilder {
       }
       console.log(`\nBlock ${i+1}`)
 
-      for (let j = 0; j < rosterBlock.length; j++) {
-        const assignment = rosterBlock[j]
-        const player = assignment.player
-        console.log(`${this.positions5[j]}\t ${player}`)
+      for (let j = 0; j < this.positions5.length; j++) {
+        const position = this.positions5[j]
+        const player = rosterBlock[position]
+       console.log(`${position}\t ${player}`)
       }
     }
   }
